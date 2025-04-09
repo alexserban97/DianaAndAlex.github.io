@@ -59,6 +59,7 @@
           <li class="nav-item"><a class="nav-link smooth-scroll" href="#events">Events</a></li>
           <li class="nav-item"><a class="nav-link smooth-scroll" href="#gallery">Gallery</a></li>
           <li class="nav-item"><a class="nav-link smooth-scroll" href="#rsvp">RSVP</a></li>
+          <li class="nav-item"><a class="nav-link smooth-scroll" href="#gifts">Gift Ideas</a></li>
         </ul>
       </div>
     </div>
@@ -242,6 +243,19 @@
     </div>
   </div>
 </div>
+<div class="ww-section bg-light" id="gifts">
+  <div class="container">
+    <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Gift Ideas</h2>
+    <p class="text-center mb-4">Alege un cadou pe care ai vrea să ni-l oferi. Bifează pentru a-l marca drept rezervat.</p>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <ul class="list-group" id="gift-list">
+          <!-- Cadourile vor fi generate automat aici -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="ww-footer bg-light">
   <div class="container text-center py-4">
     <p class="my-0">&copy; Wonderful Wedding. All rights reserved.</p>
@@ -255,5 +269,38 @@
     <script src="scripts/aos.js?ver=1.1.0"></script>
     <script src="scripts/ekko-lightbox.min.js?ver=1.1.0"></script>
     <script src="scripts/main.js?ver=1.1.0"></script>
+    <script>
+  const gifts = [
+    { name: "Espressor DeLonghi Magnifica", link: "https://example.com/espressor" },
+    { name: "Set pahare cristal", link: "https://example.com/pahare" },
+    { name: "Voucher IKEA", link: "https://example.com/ikea" },
+    { name: "Masina de spalat vase Bosch", link: "https://example.com/masina" },
+    { name: "Robot de bucatarie KitchenAid", link: "https://example.com/kitchenaid" }
+  ];
+
+  const giftList = document.getElementById("gift-list");
+
+  gifts.forEach((gift, index) => {
+    const li = document.createElement("li");
+    li.className = "list-group-item d-flex justify-content-between align-items-center";
+
+    const checked = localStorage.getItem(`gift-${index}`) === "true";
+
+    li.innerHTML = `
+      <div>
+        <a href="${gift.link}" target="_blank">${gift.name}</a>
+      </div>
+      <div>
+        <input type="checkbox" id="gift-check-${index}" ${checked ? "checked" : ""}>
+      </div>
+    `;
+
+    giftList.appendChild(li);
+
+    document.getElementById(`gift-check-${index}`).addEventListener("change", function () {
+      localStorage.setItem(`gift-${index}`, this.checked);
+    });
+  });
+</script>
   </body>
 </html>
