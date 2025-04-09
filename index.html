@@ -298,40 +298,24 @@
 
     giftList.appendChild(li);
 
-    document.getElementById(`gift-check-${index}`).addEventListener("change", function () {
-      localStorage.setItem(`gift-${index}`, this.checked);
-    });
-  });
+      <script>
+      // Trimiterea formularului la EmailJS
+      document.getElementById("rsvp-form").addEventListener("submit", function(event){
+        event.preventDefault();  // Previne trimiterea formularului tradițional
 
-  // Înlocuiește cu public key-ul tău
-  const EMAILJS_PUBLIC_KEY = '7nDBt8hK4b7ppAFu3'; // Înlocuiește cu cheia publică
+        const formData = new FormData(this);
 
-  // Initiaza EmailJS
-  emailjs.init(EMAILJS_PUBLIC_KEY);
-
-  // Atunci când formularul de rezervare a cadoului este trimis
-  document.getElementById('gift-form').addEventListener('submit', function (event) {
-    event.preventDefault(); // Previne refresh-ul paginii
-
-    const gift = document.getElementById('gift').value;
-    const email = document.getElementById('email').value;
-
-    // Obiectul de date pe care îl trimitem
-    const templateParams = {
-      email: email,
-      gift: gift,
-      giftLink: 'https://example.com/' + gift.replace(/\s+/g, '-').toLowerCase() // Schimbă link-ul cadoului
-    };
-
-    // Trimiterea emailului
-    emailjs.send('service_id', 'template_id', templateParams)
-      .then(function (response) {
-        alert('Cadoul a fost rezervat! Vei primi un email de confirmare.');
-      }, function (error) {
-        alert('Eroare la trimiterea emailului. Te rugăm să încerci din nou.');
+        // Trimite datele formularului către EmailJS
+        emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
+          .then(function(response) {
+            alert("RSVP sent successfully!");
+            console.log("Success:", response);
+          }, function(error) {
+            alert("Failed to send RSVP.");
+            console.log("Error:", error);
+          });
       });
-  });
-</script>
+    </script>
 </body>
 </html>
 
