@@ -256,66 +256,6 @@
     </div>
   </div>
 </div>
-<div class="ww-footer bg-light">
-  <div class="container text-center py-4">
-    <p class="my-0">&copy; Wonderful Wedding. All rights reserved.</p>
-    <p class="mb-0">Design - <a class="credit" href="https://templateflip.com" target="_blank">TemplateFlip</a></p>
-  </div>
-</div>
-<script src="scripts/jquery.min.js?ver=1.1.0"></script>
-<script src="scripts/bootstrap.bundle.min.js?ver=1.1.0"></script>
-<script src="scripts/aos.js?ver=1.1.0"></script>
-<script src="scripts/ekko-lightbox.min.js?ver=1.1.0"></script>
-<script src="scripts/main.js?ver=1.1.0"></script>
-
-<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
-<script>
-  const gifts = [
-    { name: "Espressor DeLonghi Magnifica", link: "https://www.emag.ro/canapea-extensibila-olivia-lada-depozitare-220x70x88-cm-gri-negru-503/pd/DSPNP1BBM/?ref=profiled_categories_home_banner_fill_2_1&provider=rec&recid=rec_93_90799ff8fcf36603f7a9d30a2d384ff6e970f8f60e591ab62f53fb4fef09ce01_1744225541&scenario_ID=93" },
-    { name: "Set pahare cristal", link: "https://example.com/pahare" },
-    { name: "Voucher IKEA", link: "https://example.com/ikea" },
-    { name: "Masina de spalat vase Bosch", link: "https://example.com/masina" },
-    { name: "Robot de bucatarie KitchenAid", link: "https://example.com/kitchenaid" }
-  ];
-
-  const giftList = document.getElementById("gift-list");
-
-  gifts.forEach((gift, index) => {
-    const li = document.createElement("li");
-    li.className = "list-group-item d-flex justify-content-between align-items-center";
-
-    const checked = localStorage.getItem(`gift-${index}`) === "true";
-
-    li.innerHTML = `
-      <div>
-        <a href="${gift.link}" target="_blank">${gift.name}</a>
-      </div>
-      <div>
-        <input type="checkbox" id="gift-check-${index}" ${checked ? "checked" : ""}>
-      </div>
-    `;
-
-    giftList.appendChild(li);
-
-      <script>
-      // Trimiterea formularului la EmailJS
-      document.getElementById("rsvp-form").addEventListener("submit", function(event){
-        event.preventDefault();  // Previne trimiterea formularului tradițional
-
-        const formData = new FormData(this);
-
-        // Trimite datele formularului către EmailJS
-        emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
-          .then(function(response) {
-            alert("RSVP sent successfully!");
-            console.log("Success:", response);
-          }, function(error) {
-            alert("Failed to send RSVP.");
-            console.log("Error:", error);
-          });
-      });
-    </script>
   <!--De aici incepe zona de caouri-->
 <!DOCTYPE html>
 <html lang="ro">
