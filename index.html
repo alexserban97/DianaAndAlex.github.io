@@ -20,48 +20,126 @@
   <link href="css/ekko-lightbox.css?ver=1.1.0" rel="stylesheet">
   <link href="css/main.css?ver=1.1.0" rel="stylesheet">
   <style>
-    .gift-registry {
-      margin-top: 60px;
+    /* Stiluri generale */
+    body {
+      font-family: 'Dosis', sans-serif;
+      color: #333;
     }
-    .product-container {
+    
+    /* Stiluri pentru secțiunea de cadouri */
+    #gifts {
+      padding: 80px 0;
+      background-color: #f8f9fa;
+    }
+    
+    .gift-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
+      gap: 30px;
+      margin: 40px auto;
+      max-width: 1200px;
     }
-    .product {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 15px;
-      width: 280px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+    
+    .gift-item {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 25px;
+      width: 320px;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
     }
-    .product:hover {
+    
+    .gift-item:hover {
       transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
-    .product img {
+    
+    .gift-item img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
       border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .gift-item h3 {
+      color: #333;
       margin-bottom: 15px;
+      font-size: 1.4rem;
     }
-    .hidden-form {
+    
+    .gift-item p {
+      color: #666;
+      margin-bottom: 20px;
+      min-height: 60px;
+    }
+    
+    .gift-form {
       display: none;
-      margin: 30px auto;
-      padding: 25px;
-      border: 1px solid #eee;
-      border-radius: 10px;
+      margin: 50px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       max-width: 500px;
-      background: #f9f9f9;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+    
+    .gift-form h2 {
+      margin-bottom: 25px;
+      text-align: center;
+      color: #333;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #555;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    
+    #gift-status {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: 500;
+      min-height: 24px;
+    }
+    
+    .btn-reserve {
+      background-color: #d4a373;
+      border-color: #d4a373;
+      padding: 12px 25px;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s;
+      color: white;
+    }
+    
+    .btn-reserve:hover {
+      background-color: #c08a5d;
+      border-color: #c08a5d;
+      transform: translateY(-2px);
+      color: white;
+    }
+    
+    /* Animations */
     [data-aos] {
-      opacity: 1 !important;
-      transform: translate(0) scale(1) !important;
+      transition: all 0.8s ease;
     }
   </style>
 </head>
@@ -103,211 +181,211 @@
         </div>
       </nav>
     </div>
- <div class="ww-section" id="couple">
-   <div class="container">
-     <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Groom & Bride</h2>
-     <div class="row text-center">
-       <div class="col-md-6">
-         <div class="mt-3"><img class="img-fluid" src="images/groom.jpg" alt="Groom" data-aos="flip-left" data-aos-duration="1000"/>
-           <p class="pt-3 text-left text-muted">Buna siua! Numele meu este Alex si imi iau bibica de sotie!</p>
-           <h3 class="h2 ww-title">Alex</h3>
-         </div>
-       </div>
-       <div class="col-md-6">
-         <div class="mt-3"><img class="img-fluid" src="images/bride.jpg" alt="Bride" data-aos="flip-right" data-aos-duration="1000"/>
-           <p class="pt-3 text-left text-muted">Buna siua! Eu sunt Diana si eu sunt bibica!</p>
-           <h3 class="h2 ww-title">Diana</h3>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
- <div class="ww-section bg-light" id="events">
-   <div class="container ww-wedding-event">
-     <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Wedding Events</h2>
-     <div class="row">
-       <div class="col-md-7 col-sm-12">
-         <div class="my-3">
-           <div class="h4">Ceremonia Civila</div>
-           <ul>
-             <li><i class="text-muted fas fa-map-marker-alt"></i><span class="pl-2 text-muted">Primaria Sector 3, Bucuresti</span></li>
-             <li class="pt-2"><i class="text-muted far fa-calendar-alt"></i><span class="pl-2 text-muted">5 Septembrie 2025, 12 PM</span></li>
-           </ul>
-           <p>Ne-a invitat Negoita la el sa facem cununie, a spus ca daca venit cu mai multi prieteni avem sanse sa ne dea si un apartament in Hills cado'.</p>
-         </div>
-       </div>
-       <div class="col-md-5 col-sm-12">
-         <div class="my-3"><img class="img-fluid" src="images/wedding-party.jpg" alt="Petrecerea de Cununie" data-aos="fade-down-right" data-aos-duration="1000"/></div>
-       </div>
-     </div>
-     <div class="row">
-       <div class="col-md-7 col-sm-12">
-         <div class="my-3">
-           <div class="h4">Petrecere de Cununie</div>
-           <ul>
-             <li><i class="text-muted fas fa-map-marker-alt "></i><span class="pl-2 text-muted">Busteni, Prahova, Vila Mama Jana</span></li>
-             <li class="pt-2"><i class="text-muted far fa-calendar-alt "></i><span class="pl-2 text-muted">5-7 Septembrie 2025</span></li>
-           </ul>
-           <p>Ne-am ales locatia cu greu, inca nu e batuta in cuie, so mai este timp sa ne razgandim, dar speram sa ne distram ca in filme</p>
-         </div>
-       </div>
-       <div class="col-md-5 col-sm-12">
-         <div class="my-3"><img class="img-fluid" src="images/reception.jpg" alt="Reception" data-aos="fade-up-right" data-aos-duration="1000"/></div>
-       </div>
-     </div>
-   </div>
- </div>
- <div class="ww-section bg-light" id="gallery">
-   <div class="ww-photo-gallery">
-     <div class="container">
-       <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Photo Gallery</h2>
-       <div class="col-md-12 text-center ww-category-filter mb-4"><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="all">All</a><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="vacation">Our Vacation</a><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="party">Party</a><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="ceremony">Ceremony</a><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="wedding">Wedding</a></div>
-       <div class="ww-gallery" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-duration="1000" data-aos-offset="0">
-         <div class="card-columns">
-           <div class="card" data-groups="[&quot;vacation&quot;,&quot;ceremony&quot;]"><a href="images/gallery-pic-1.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-1.jpg" alt="Gallery Pic 1"/></a></div>
-           <div class="card" data-groups="[&quot;party&quot;,&quot;wedding&quot;]"><a href="images/gallery-pic-2.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-2.jpg" alt="Gallery Pic 2"/></a></div>
-           <div class="card" data-groups="[&quot;vacation&quot;]"><a href="images/gallery-pic-3.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-3.jpg" alt="Gallery Pic 3"/></a></div>
-           <div class="card" data-groups="[&quot;party&quot;,&quot;vacation&quot;]"><a href="images/gallery-pic-4.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-4.jpg" alt="Gallery Pic 4"/></a></div>
-           <div class="card" data-groups="[&quot;vacation&quot;]"><a href="images/gallery-pic-5.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-5.jpg" alt="Gallery Pic 5"/></a></div>
-           <div class="card" data-groups="[&quot;wedding&quot;,&quot;ceremony&quot;,&quot;party&quot;]"><a href="images/gallery-pic-6.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-6.jpg" alt="Gallery Pic 6"/></a></div>
-           <div class="card" data-groups="[&quot;vacation&quot;]"><a href="images/gallery-pic-7.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-7.jpg" alt="Gallery Pic 7"/></a></div>
-           <div class="card" data-groups="[&quot;wedding&quot;,&quot;party&quot;]"><a href="images/gallery-pic-8.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-8.jpg" alt="Gallery Pic 8"/></a></div>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
- <div class="ww-section ww-rsvp-detail text-white" id="rsvp">
-   <div class="container" data-aos="zoom-in-up" data-aos-duration="1000">
-     <div class="col text-center">
-       <h2 class="h1 ww-title pb-3" data-aos="zoom-in-down" data-aos-duration="1000">Join Our Party</h2>
-     </div>
-     <div class="row ww-rsvp-form">
-       <div class="col-md-10">
-         <div class="card-body">
-           <form action="https://formspree.io/manelgvd" method="POST">
-             <div class="row">
-               <div class="col md-6 pb-3">
-                 <div class="form-group">
-                   <label for="name-input">Your Name*</label>
-                   <input class="form-control" id="name-input" type="text" name="name" required="required"/>
-                 </div>
-               </div>
-               <div class="col-md-6 pb-3">
-                 <div class="form-group">
-                   <label for="email-input">Your Email*</label>
-                   <input class="form-control" id="email-input" type="email" name="_replyto" required="required"/>
-                 </div>
-               </div>
-             </div>
-             <div class="row">
-               <div class="col md-6 pb-3">
-                 <div class="form-group">
-                   <label for="guest-input">Number of Guests</label>
-                   <select class="form-control" id="guest-input" name="guest">
-                     <option value="1">One</option>
-                     <option value="2">Two</option>
-                     <option value="3">Three</option>
-                     <option value="4">Four</option>
-                   </select>
-                 </div>
-               </div>
-               <div class="col-md-6 pb-3">
-                 <div class="form-group">
-                   <label for="events-input">I am Attending</label>
-                   <select class="form-control" id="events-input" name="events">
-                     <option value="all-event">All Events</option>
-                     <option value="wedding-ceremony">Wedding ceremony</option>
-                     <option value="reception-party">Reception Party</option>
-                   </select>
-                 </div>
-               </div>
-             </div>
- 
-             <!-- Secțiunea de alegere a cocktailurilor -->
-             <div class="row">
-               <div class="col-md-12 pb-3">
-                 <div class="form-group">
-                   <label for="cocktails-input">What cocktails do you prefer? (Select multiple)</label><br>
-                   <input type="checkbox" id="mojito" name="cocktails[]" value="Mojito">
-                   <label for="mojito">Mojito</label><br>
- 
-                   <input type="checkbox" id="pinaColada" name="cocktails[]" value="Pina Colada">
-                   <label for="pinaColada">Pina Colada</label><br>
- 
-                   <input type="checkbox" id="margarita" name="cocktails[]" value="Margarita">
-                   <label for="margarita">Margarita</label><br>
- 
-                   <input type="checkbox" id="cosmopolitan" name="cocktails[]" value="Cosmopolitan">
-                   <label for="cosmopolitan">Cosmopolitan</label><br>
- 
-                   <input type="checkbox" id="maiTai" name="cocktails[]" value="Mai Tai">
-                   <label for="maiTai">Mai Tai</label><br>
- 
-                   <input type="checkbox" id="bloodyMary" name="cocktails[]" value="Bloody Mary">
-                   <label for="bloodyMary">Bloody Mary</label><br>
- 
-                   <input type="checkbox" id="daiquiri" name="cocktails[]" value="Daiquiri">
-                   <label for="daiquiri">Daiquiri</label><br>
- 
-                   <input type="checkbox" id="whiskeySour" name="cocktails[]" value="Whiskey Sour">
-                   <label for="whiskeySour">Whiskey Sour</label><br>
- 
-                   <input type="checkbox" id="negroni" name="cocktails[]" value="Negroni">
-                   <label for="negroni">Negroni</label><br>
- 
-                   <input type="checkbox" id="aperolSpritz" name="cocktails[]" value="Aperol Spritz">
-                   <label for="aperolSpritz">Aperol Spritz</label><br>
-                 </div>
-               </div>
-             </div>
- 
-             <div class="row">
-               <div class="col">
-                 <div class="form-group">
-                   <label for="message-input">Your Message</label>
-                   <textarea class="form-control" id="message-input" name="message" rows="4"></textarea>
-                 </div>
-               </div>
-             </div>
-             <div class="row">
-               <div class="col text-center">
-                 <button class="btn btn-primary btn-submit" type="submit">Send</button>
-               </div>
-             </div>
-           </form>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
-<div class="ww-section bg-light" id="gifts">
-    <div class="container">
-      <h2 class="h1 text-center pb-3 ww-title">Lista de Cadouri</h2>
-      <p class="text-center mb-4">Alegeți un cadou pe care doriți să ni-l oferiți și completați formularul de rezervare.</p>
-      
-      <div class="gift-container" id="product-list"></div>
 
-      <form id="giftForm" class="gift-form">
-        <h2>Rezervă Cadoul</h2>
-        <input type="hidden" id="selectedGift" name="cadou">
-        <div class="form-group">
-          <label for="gift-name">Numele Dvs:</label>
-          <input type="text" id="gift-name" name="nume" required>
+    <div class="ww-section" id="couple">
+      <div class="container">
+        <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Groom & Bride</h2>
+        <div class="row text-center">
+          <div class="col-md-6">
+            <div class="mt-3"><img class="img-fluid" src="images/groom.jpg" alt="Groom" data-aos="flip-left" data-aos-duration="1000"/>
+              <p class="pt-3 text-left text-muted">Buna siua! Numele meu este Alex si imi iau bibica de sotie!</p>
+              <h3 class="h2 ww-title">Alex</h3>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mt-3"><img class="img-fluid" src="images/bride.jpg" alt="Bride" data-aos="flip-right" data-aos-duration="1000"/>
+              <p class="pt-3 text-left text-muted">Buna siua! Eu sunt Diana si eu sunt bibica!</p>
+              <h3 class="h2 ww-title">Diana</h3>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="gift-email">Adresa de Email:</label>
-          <input type="email" id="gift-email" name="email" required>
+      </div>
+    </div>
+
+    <div class="ww-section bg-light" id="events">
+      <div class="container ww-wedding-event">
+        <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Wedding Events</h2>
+        <div class="row">
+          <div class="col-md-7 col-sm-12">
+            <div class="my-3">
+              <div class="h4">Ceremonia Civila</div>
+              <ul>
+                <li><i class="text-muted fas fa-map-marker-alt"></i><span class="pl-2 text-muted">Primaria Sector 3, Bucuresti</span></li>
+                <li class="pt-2"><i class="text-muted far fa-calendar-alt"></i><span class="pl-2 text-muted">5 Septembrie 2025, 12 PM</span></li>
+              </ul>
+              <p>Ne-a invitat Negoita la el sa facem cununie, a spus ca daca venit cu mai multi prieteni avem sanse sa ne dea si un apartament in Hills cado'.</p>
+            </div>
+          </div>
+          <div class="col-md-5 col-sm-12">
+            <div class="my-3"><img class="img-fluid" src="images/wedding-party.jpg" alt="Petrecerea de Cununie" data-aos="fade-down-right" data-aos-duration="1000"/></div>
+          </div>
         </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary btn-reserve">Confirmă Rezervarea</button>
+        <div class="row">
+          <div class="col-md-7 col-sm-12">
+            <div class="my-3">
+              <div class="h4">Petrecere de Cununie</div>
+              <ul>
+                <li><i class="text-muted fas fa-map-marker-alt "></i><span class="pl-2 text-muted">Busteni, Prahova, Vila Mama Jana</span></li>
+                <li class="pt-2"><i class="text-muted far fa-calendar-alt "></i><span class="pl-2 text-muted">5-7 Septembrie 2025</span></li>
+              </ul>
+              <p>Ne-am ales locatia cu greu, inca nu e batuta in cuie, so mai este timp sa ne razgandim, dar speram sa ne distram ca in filme</p>
+            </div>
+          </div>
+          <div class="col-md-5 col-sm-12">
+            <div class="my-3"><img class="img-fluid" src="images/reception.jpg" alt="Reception" data-aos="fade-up-right" data-aos-duration="1000"/></div>
+          </div>
         </div>
-        <p id="gift-status"></p>
-      </form>
+      </div>
+    </div>
+
+    <div class="ww-section bg-light" id="gallery">
+      <div class="ww-photo-gallery">
+        <div class="container">
+          <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Photo Gallery</h2>
+          <div class="col-md-12 text-center ww-category-filter mb-4"><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="all">All</a><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="vacation">Our Vacation</a><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="party">Party</a><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="ceremony">Ceremony</a><a class="btn btn-outline-primary ww-filter-button" href="#" data-filter="wedding">Wedding</a></div>
+          <div class="ww-gallery" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-duration="1000" data-aos-offset="0">
+            <div class="card-columns">
+              <div class="card" data-groups="[&quot;vacation&quot;,&quot;ceremony&quot;]"><a href="images/gallery-pic-1.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-1.jpg" alt="Gallery Pic 1"/></a></div>
+              <div class="card" data-groups="[&quot;party&quot;,&quot;wedding&quot;]"><a href="images/gallery-pic-2.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-2.jpg" alt="Gallery Pic 2"/></a></div>
+              <div class="card" data-groups="[&quot;vacation&quot;]"><a href="images/gallery-pic-3.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-3.jpg" alt="Gallery Pic 3"/></a></div>
+              <div class="card" data-groups="[&quot;party&quot;,&quot;vacation&quot;]"><a href="images/gallery-pic-4.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-4.jpg" alt="Gallery Pic 4"/></a></div>
+              <div class="card" data-groups="[&quot;vacation&quot;]"><a href="images/gallery-pic-5.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-5.jpg" alt="Gallery Pic 5"/></a></div>
+              <div class="card" data-groups="[&quot;wedding&quot;,&quot;ceremony&quot;,&quot;party&quot;]"><a href="images/gallery-pic-6.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-6.jpg" alt="Gallery Pic 6"/></a></div>
+              <div class="card" data-groups="[&quot;vacation&quot;]"><a href="images/gallery-pic-7.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-7.jpg" alt="Gallery Pic 7"/></a></div>
+              <div class="card" data-groups="[&quot;wedding&quot;,&quot;party&quot;]"><a href="images/gallery-pic-8.jpg" data-toggle="lightbox" data-gallery="ww-gallery"><img class="img-fluid" src="images/gallery-pic-8.jpg" alt="Gallery Pic 8"/></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ww-section ww-rsvp-detail text-white" id="rsvp">
+      <div class="container" data-aos="zoom-in-up" data-aos-duration="1000">
+        <div class="col text-center">
+          <h2 class="h1 ww-title pb-3" data-aos="zoom-in-down" data-aos-duration="1000">Join Our Party</h2>
+        </div>
+        <div class="row ww-rsvp-form">
+          <div class="col-md-10">
+            <div class="card-body">
+              <form action="https://formspree.io/manelgvd" method="POST">
+                <div class="row">
+                  <div class="col md-6 pb-3">
+                    <div class="form-group">
+                      <label for="name-input">Your Name*</label>
+                      <input class="form-control" id="name-input" type="text" name="name" required="required"/>
+                    </div>
+                  </div>
+                  <div class="col-md-6 pb-3">
+                    <div class="form-group">
+                      <label for="email-input">Your Email*</label>
+                      <input class="form-control" id="email-input" type="email" name="_replyto" required="required"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col md-6 pb-3">
+                    <div class="form-group">
+                      <label for="guest-input">Number of Guests</label>
+                      <select class="form-control" id="guest-input" name="guest">
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6 pb-3">
+                    <div class="form-group">
+                      <label for="events-input">I am Attending</label>
+                      <select class="form-control" id="events-input" name="events">
+                        <option value="all-event">All Events</option>
+                        <option value="wedding-ceremony">Wedding ceremony</option>
+                        <option value="reception-party">Reception Party</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 pb-3">
+                    <div class="form-group">
+                      <label for="cocktails-input">What cocktails do you prefer? (Select multiple)</label><br>
+                      <input type="checkbox" id="mojito" name="cocktails[]" value="Mojito">
+                      <label for="mojito">Mojito</label><br>
+                      <input type="checkbox" id="pinaColada" name="cocktails[]" value="Pina Colada">
+                      <label for="pinaColada">Pina Colada</label><br>
+                      <input type="checkbox" id="margarita" name="cocktails[]" value="Margarita">
+                      <label for="margarita">Margarita</label><br>
+                      <input type="checkbox" id="cosmopolitan" name="cocktails[]" value="Cosmopolitan">
+                      <label for="cosmopolitan">Cosmopolitan</label><br>
+                      <input type="checkbox" id="maiTai" name="cocktails[]" value="Mai Tai">
+                      <label for="maiTai">Mai Tai</label><br>
+                      <input type="checkbox" id="bloodyMary" name="cocktails[]" value="Bloody Mary">
+                      <label for="bloodyMary">Bloody Mary</label><br>
+                      <input type="checkbox" id="daiquiri" name="cocktails[]" value="Daiquiri">
+                      <label for="daiquiri">Daiquiri</label><br>
+                      <input type="checkbox" id="whiskeySour" name="cocktails[]" value="Whiskey Sour">
+                      <label for="whiskeySour">Whiskey Sour</label><br>
+                      <input type="checkbox" id="negroni" name="cocktails[]" value="Negroni">
+                      <label for="negroni">Negroni</label><br>
+                      <input type="checkbox" id="aperolSpritz" name="cocktails[]" value="Aperol Spritz">
+                      <label for="aperolSpritz">Aperol Spritz</label><br>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="message-input">Your Message</label>
+                      <textarea class="form-control" id="message-input" name="message" rows="4"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col text-center">
+                    <button class="btn btn-primary btn-submit" type="submit">Send</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secțiunea de cadouri -->
+    <div class="ww-section bg-light" id="gifts">
+      <div class="container">
+        <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Lista de Cadouri</h2>
+        <p class="text-center mb-4" data-aos="fade-up" data-aos-delay="200">Alegeți un cadou pe care doriți să ni-l oferiți și completați formularul de rezervare.</p>
+        
+        <div class="gift-container" id="product-list"></div>
+
+        <form id="giftForm" class="gift-form" data-aos="fade-up" data-aos-delay="300">
+          <h2>Rezervă Cadoul</h2>
+          <input type="hidden" id="selectedGift" name="cadou">
+          <div class="form-group">
+            <label for="gift-name">Numele Dvs:</label>
+            <input type="text" id="gift-name" name="nume" required>
+          </div>
+          <div class="form-group">
+            <label for="gift-email">Adresa de Email:</label>
+            <input type="email" id="gift-email" name="email" required>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-reserve">Confirmă Rezervarea</button>
+          </div>
+          <p id="gift-status"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="ww-footer bg-light">
+      <div class="container text-center py-4">
+        <p class="my-0">&copy; Wonderful Wedding. All rights reserved.</p>
+        <p class="mb-0">Design - <a class="credit" href="https://templateflip.com" target="_blank">TemplateFlip</a></p>
+      </div>
     </div>
   </div>
-
-  <!-- Footer-ul existent -->
 
   <script src="scripts/jquery.min.js?ver=1.1.0"></script>
   <script src="scripts/bootstrap.bundle.min.js?ver=1.1.0"></script>
@@ -316,6 +394,13 @@
   <script src="scripts/main.js?ver=1.1.0"></script>
 
   <script>
+    // Inițializare AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
+
     // Lista de cadouri
     const products = [
       {
@@ -341,9 +426,11 @@
     const statusText = document.getElementById("gift-status");
 
     // Afișare lista cadouri
-    products.forEach(product => {
+    products.forEach((product, index) => {
       const div = document.createElement("div");
       div.className = "gift-item";
+      div.setAttribute("data-aos", "fade-up");
+      div.setAttribute("data-aos-delay", `${index * 100}`);
       div.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <h3>${product.name}</h3>
@@ -357,7 +444,7 @@
     window.selectGift = function(name) {
       selectedGiftInput.value = name;
       form.style.display = "block";
-      form.scrollIntoView({ behavior: "smooth" });
+      form.scrollIntoView({ behavior: "smooth", block: "center" });
       statusText.textContent = "";
       statusText.style.color = "inherit";
     };
