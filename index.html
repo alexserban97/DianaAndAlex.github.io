@@ -286,25 +286,23 @@
         <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Gift Registry</h2>
         <p class="text-center mb-4">Alege un cadou pe care ai vrea să ni-l oferi. Completează formularul pentru a-l marca ca rezervat.</p>
         
-        <div class="gift-container" id="gift-list"></div>
+        <div class="product-container" id="product-list"></div>
 
-        <form id="giftForm" class="gift-form">
-          <h3 class="text-center">Rezervă cadoul</h3>
-          <input type="hidden" id="selectedGift" name="gift">
+        <form id="giftForm" class="hidden-form">
+          <h2>Completează pentru a rezerva</h2>
+          <input type="hidden" id="selectedGift" name="cadou">
           <div class="form-group">
-            <label for="gift-name">Numele tău:</label>
-            <input type="text" class="form-control" id="gift-name" name="name" required>
+            <label>Numele tău:<br>
+              <input type="text" class="form-control" name="nume" required>
+            </label>
           </div>
           <div class="form-group">
-            <label for="gift-email">Email:</label>
-            <input type="email" class="form-control" id="gift-email" name="email" required>
+            <label>Emailul tău:<br>
+              <input type="email" class="form-control" name="email" required>
+            </label>
           </div>
-          <div class="form-group">
-            <label for="gift-message">Mesaj (optional):</label>
-            <textarea class="form-control" id="gift-message" name="message" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Confirmă rezervarea</button>
-          <p id="gift-status" class="text-center mt-3"></p>
+          <button type="submit" class="btn btn-primary">Trimite Confirmarea</button>
+          <p id="status" class="mt-3 text-center"></p>
         </form>
       </div>
     </div>
@@ -322,7 +320,6 @@
   <script src="scripts/aos.js?ver=1.1.0"></script>
   <script src="scripts/ekko-lightbox.min.js?ver=1.1.0"></script>
   <script src="scripts/main.js?ver=1.1.0"></script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
   <script>
     // Inițializare AOS
@@ -332,55 +329,45 @@
     });
 
     // Lista de cadouri
-    const gifts = [
+    const products = [
       {
-        name: "Espressor DeLonghi Magnifica",
+        name: "Espressor Philips",
         image: "https://s13emagst.akamaized.net/products/42751/42750901/images/res_0e1c4b1f8a8a5b9d8545a8b8e8b8e8b8.jpg",
-        description: "Espressor automat pentru cafea proaspătă",
-        link: "https://www.emag.ro/espressor-automat-delonghi-magnifica-s-ecam-22-110-b/pd/D0RV90BBM/"
+        description: "Un espressor elegant pentru dimineți perfecte."
       },
       {
-        name: "Set pahare cristal",
+        name: "Set farfurii ceramice",
         image: "https://s13emagst.akamaized.net/products/12345/12345678/images/res_1a2b3c4d5e6f7g8h9i0j.jpg",
-        description: "Set de 6 pahare de cristal pentru vin",
-        link: "https://example.com/pahare"
+        description: "Farfurii artizanale, lucrate manual."
       },
       {
-        name: "Voucher IKEA",
+        name: "Cuptor cu microunde Samsung",
         image: "https://s13emagst.akamaized.net/products/23456/23456789/images/res_9i8h7g6f5e4d3c2b1a.jpg",
-        description: "Voucher valabil în toate magazinele IKEA",
-        link: "https://example.com/ikea"
-      },
-      {
-        name: "Aspirator Dyson V15",
-        image: "https://s13emagst.akamaized.net/products/58272/58271891/images/res_7d7f8fd29338bca9.jpg",
-        description: "Aspirator vertical cu tehnologie avansată",
-        link: "https://example.com/dyson"
+        description: "Perfect pentru mesele rapide."
       }
     ];
 
-    // Afișare lista cadouri
-    const giftContainer = document.getElementById("gift-list");
+    const container = document.getElementById("product-list");
     const form = document.getElementById("giftForm");
     const selectedGiftInput = document.getElementById("selectedGift");
-    const statusText = document.getElementById("gift-status");
+    const statusText = document.getElementById("status");
 
-    gifts.forEach((gift, index) => {
+    // Afișare lista cadouri
+    products.forEach(product => {
       const div = document.createElement("div");
-      div.className = "gift-item";
+      div.className = "product";
       div.innerHTML = `
-        <img src="${gift.image}" alt="${gift.name}">
-        <h4>${gift.name}</h4>
-        <p>${gift.description}</p>
-        <a href="${gift.link}" target="_blank" class="btn btn-outline-secondary btn-sm mb-2">Vezi detalii</a>
-        <button class="btn btn-primary btn-sm" onclick="selectGift(${index})">Rezervă</button>
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <button class="btn btn-primary" onclick="selectGift('${product.name.replace(/'/g, "\\'")}')">Rezervă acest cadou</button>
       `;
-      giftContainer.appendChild(div);
+      container.appendChild(div);
     });
 
     // Funcție pentru selectare cadou
-    window.selectGift = function(index) {
-      selectedGiftInput.value = gifts[index].name;
+    window.selectGift = function(name) {
+      selectedGiftInput.value = name;
       form.style.display = "block";
       form.scrollIntoView({ behavior: "smooth" });
     };
@@ -388,30 +375,31 @@
     // Trimitere formular
     form.addEventListener("submit", async function(event) {
       event.preventDefault();
-      statusText.textContent = "Se trimite...";
+      statusText.innerText = "Se trimite...";
       statusText.style.color = "#000";
 
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
       try {
-        // Inițializare EmailJS (înlocuiește cu datele tale)
-        emailjs.init("YOUR_USER_ID");
-        
-        // Trimite datele
-        const response = await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-          gift: selectedGiftInput.value,
-          name: form.name.value,
-          email: form.email.value,
-          message: form.message.value
+        const response = await fetch("https://script.google.com/macros/s/AKfycbzc8yMcL_Qqu3Tzij-Qtp2I4dxspotIcpZ3hZ6EsmNqfWqK4clzlerM/exec", {
+          method: "POST",
+          body: new URLSearchParams(data)
         });
 
-        statusText.textContent = "Cadoul a fost rezervat! Vei primi un email de confirmare.";
-        statusText.style.color = "green";
-        form.reset();
-        setTimeout(() => {
-          form.style.display = "none";
-        }, 3000);
+        if (response.ok) {
+          statusText.innerText = "Cadoul a fost rezervat cu succes! Verifică emailul pentru confirmare.";
+          statusText.style.color = "green";
+          form.reset();
+          setTimeout(() => {
+            form.style.display = "none";
+          }, 3000);
+        } else {
+          throw new Error('Network response was not ok');
+        }
       } catch (error) {
         console.error("Error:", error);
-        statusText.textContent = "Eroare la trimitere. Te rugăm să încerci din nou.";
+        statusText.innerText = "A apărut o eroare. Încearcă din nou.";
         statusText.style.color = "red";
       }
     });
