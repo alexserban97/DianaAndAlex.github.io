@@ -328,7 +328,7 @@
      </div>
    </div>
  </div>
-  <div class="ww-section bg-light" id="gifts">
+<div class="ww-section bg-light" id="gifts">
     <div class="container">
       <h2 class="h1 text-center pb-3 ww-title" data-aos="zoom-in-down" data-aos-duration="1000">Lista de Cadouri</h2>
       <p class="text-center mb-4" data-aos="fade-up" data-aos-delay="200">Alegeți un cadou pe care doriți să ni-l oferiți și completați formularul de rezervare.</p>
@@ -354,7 +354,7 @@
     </div>
   </div>
 
-  <!-- Footer-ul existent -->
+  <!-- Restul conținutului rămâne neschimbat -->
 
   <script src="scripts/jquery.min.js?ver=1.1.0"></script>
   <script src="scripts/bootstrap.bundle.min.js?ver=1.1.0"></script>
@@ -363,6 +363,12 @@
   <script src="scripts/main.js?ver=1.1.0"></script>
 
   <script>
+    // Inițializare AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out'
+    });
+
     // Lista de cadouri
     const products = [
       {
@@ -388,9 +394,11 @@
     const statusText = document.getElementById("gift-status");
 
     // Afișare lista cadouri
-    products.forEach(product => {
+    products.forEach((product, index) => {
       const div = document.createElement("div");
       div.className = "gift-item";
+      div.setAttribute("data-aos", "fade-up");
+      div.setAttribute("data-aos-delay", `${index * 100}`);
       div.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <h3>${product.name}</h3>
@@ -404,7 +412,7 @@
     window.selectGift = function(name) {
       selectedGiftInput.value = name;
       form.style.display = "block";
-      form.scrollIntoView({ behavior: "smooth" });
+      form.scrollIntoView({ behavior: "smooth", block: "center" });
       statusText.textContent = "";
       statusText.style.color = "inherit";
     };
