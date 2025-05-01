@@ -286,7 +286,7 @@
       
       <div class="gift-container" id="product-list"></div>
 
-      <form id="giftForm" class="gift-form">
+      <form id="giftForm" class="gift-form" style="display: none;">
         <h2>Rezervă Cadoul</h2>
         <input type="hidden" id="selectedGift" name="cadou">
         <div class="form-group">
@@ -372,13 +372,24 @@
     });
 
     // Funcție pentru selectare cadou
-    window.selectGift = function(name) {
-      selectedGiftInput.value = name;
-      form.style.display = "block";
-      form.scrollIntoView({ behavior: "smooth" });
-      statusText.textContent = "";
-      statusText.style.color = "inherit";
-    };
+window.selectGift = function(name) {
+  const selectedGiftInput = document.getElementById("selectedGift");
+  const form = document.getElementById("giftForm");
+  const statusText = document.getElementById("gift-status");
+
+  // Setează cadoul selectat în inputul ascuns
+  selectedGiftInput.value = name;
+
+  // Curăță eventuale mesaje anterioare
+  statusText.textContent = "";
+  statusText.style.color = "inherit";
+
+  // Afișează formularul (dacă era ascuns)
+  form.style.display = "block";
+
+  // Derulează până la formular (cu efect lin)
+  form.scrollIntoView({ behavior: "smooth" });
+};
 
     // Trimitere formular îmbunătățită
     form.addEventListener("submit", async function(event) {
