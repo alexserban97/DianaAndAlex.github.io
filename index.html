@@ -377,80 +377,72 @@
   // Încarcă produsele din Google Sheets
   // Încarcă produsele din Google Sheets
 async function loadProducts() {
-  const container = document.getElementById("gifts-container"); // Make sure you have this container in HTML
+  // First ensure the container exists
+  const container = document.getElementById("gifts-container");
+  
+  if (!container) {
+    console.error("Error: Could not find element with ID 'gifts-container'");
+    return;
+  }
+
   try {
-    // Add cache-busting to prevent caching issues
+    // Show loading state
+    container.innerHTML = '<div class="loading-spinner"></div>';
+
     const response = await fetch('https://script.google.com/macros/s/AKfycbz0b0fbQr9iXuT4yhEbqlNscGX1KfuwE7LiW5N-OTg-9dA8Mf6-SJvCPWAJHQu3UcUuZQ/exec?t=' + Date.now());
     
-    // Check if response is OK
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`Server returned ${response.status} status`);
     }
 
     const result = await response.json();
     
-    // Verify the data structure
-    if (!result.data || !Array.isArray(result.data)) {
+    if (!result?.data || !Array.isArray(result.data)) {
       throw new Error('Invalid data format received');
     }
 
-    // Clear previous content
+    // Clear container
     container.innerHTML = '';
 
-    // Show loading state
-    container.innerHTML = '<div class="loading">Se încarcă produsele...</div>';
-
-    // Process and display products
+    // Add products
     result.data.forEach(product => {
-      const div = document.createElement("div");
-      div.className = "gift-item";
-      div.innerHTML = `
+      const productElement = document.createElement("div");
+      productElement.className = "gift-item";
+      productElement.innerHTML = `
         <img src="${product.image}" alt="${product.name}" loading="lazy">
         <h3>${product.name}</h3>
         ${product.description ? `<p class="text-muted">${product.description}</p>` : ''}
         ${product.quantity > 0 ? 
           `<button class="btn btn-primary btn-reserve" 
-                  onclick="selectGift('${product.name.replace(/'/g, "\\'")}')"
                   data-product="${encodeURIComponent(product.name)}">
             Rezervă Acest Cadou
           </button>` 
-          : 
-          `<p class="text-danger">Nu mai sunt disponibile</p>`}
+          : `<p class="text-danger">Nu mai sunt disponibile</p>`}
       `;
-      container.appendChild(div);
+      container.appendChild(productElement);
+    });
+
+    // Add event listeners to all buttons
+    document.querySelectorAll('.btn-reserve').forEach(button => {
+      button.addEventListener('click', function() {
+        selectGift(decodeURIComponent(this.dataset.product));
+      });
     });
 
   } catch (error) {
     console.error("Eroare la încărcarea produselor:", error);
-    // Show user-friendly error message
     container.innerHTML = `
       <div class="error-message">
-        <p>Nu am putut încărca lista de cadouri. Te rugăm să încerci mai târziu.</p>
-        <button onclick="loadProducts()" class="btn btn-retry">Încearcă din nou</button>
+        <p>Eroare la încărcarea produselor. Te rugăm să reîmprospătezi pagina.</p>
+        <button onclick="location.reload()" class="btn btn-retry">Reîncarcă</button>
       </div>
     `;
   }
 }
 
-// Add this CSS to your stylesheet:
-/*
-.loading {
-  text-align: center;
-  padding: 20px;
-  font-size: 1.2em;
-}
-.error-message {
-  text-align: center;
-  padding: 20px;
-  color: #dc3545;
-}
-.btn-retry {
-  margin-top: 10px;
-  background-color: #dc3545;
-  color: white;
-}
-*/
-
+// Make sure this exists in your HTML:
+<div id="gifts-container"></div>
+    
   // Funcție pentru selectarea cadoului
   window.selectGift = function(name) {
     const selectedGiftInput = document.getElementById("selectedGift");
