@@ -378,11 +378,11 @@
   // Încarcă produsele din Google Sheets
   // Încarcă produsele din Google Sheets
 async function loadProducts() {
-  // First ensure the container exists
-  const container = document.getElementById("gift-container");
+  // Corrected to use your existing container ID
+  const container = document.getElementById("product-list");
   
   if (!container) {
-    console.error("Error: Could not find element with ID 'gift-container'");
+    console.error("Error: Could not find element with ID 'product-list'");
     return;
   }
 
@@ -435,11 +435,25 @@ async function loadProducts() {
     container.innerHTML = `
       <div class="error-message">
         <p>Eroare la încărcarea produselor. Te rugăm să reîmprospătezi pagina.</p>
-        <button onclick="location.reload()" class="btn btn-retry">Reîncarcă</button>
+        <button onclick="loadProducts()" class="btn btn-retry">Încearcă din nou</button>
       </div>
     `;
   }
 }
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize AOS animations
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      disableMutationObserver: false,
+      once: true
+    });
+  }
+  
+  // Load products
+  loadProducts();
+});
 
   // Funcție pentru selectarea cadoului
   window.selectGift = function(name) {
