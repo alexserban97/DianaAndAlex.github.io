@@ -429,20 +429,24 @@ async function loadProducts() {
 
     container.innerHTML = '';
 
-    const availableProducts = result.data.filter(product => product.quantity > 0);
+    // Filtrează produsele cu cantitate > 0
+    const availableProducts = result.data.filter(product => {
+      return product.quantity > 0;
+    });
     
     if (availableProducts.length === 0) {
       container.innerHTML = '<p>Nu sunt produse disponibile momentan.</p>';
       return;
     }
 
+    // Afișează produsele disponibile
     availableProducts.forEach(product => {
       const productElement = document.createElement("div");
       productElement.className = "gift-item";
       productElement.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" loading="lazy">
+        <img src="${product.image || 'https://via.placeholder.com/150'}" alt="${product.name}" loading="lazy">
         <h3>${product.name}</h3>
-        ${product.description ? `<p class="text-muted">${product.description}</p>` : ''}
+        ${product.link ? `<a href="${product.link}" target="_blank">Vezi detalii</a>` : ''}
         <button class="btn btn-primary btn-reserve" 
                 data-product="${encodeURIComponent(product.name)}"
                 data-row="${product.row}">
@@ -452,6 +456,7 @@ async function loadProducts() {
       container.appendChild(productElement);
     });
 
+    // Adaugă event listeners pentru butoane
     document.querySelectorAll('.btn-reserve').forEach(button => {
       button.addEventListener('click', function() {
         selectGift(decodeURIComponent(this.dataset.product), this.dataset.row);
@@ -468,7 +473,6 @@ async function loadProducts() {
     `;
   }
 }
-
 form.addEventListener("submit", async function(event) {
     event.preventDefault();
     statusText.textContent = "Se trimite cererea...";
