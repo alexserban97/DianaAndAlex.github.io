@@ -336,14 +336,16 @@
    </div>
  </div>
 <div class="ww-section bg-light" id="gifts">
-    <div class="container">
-      <h2 class="h1 text-center pb-3 ww-title">Idei de Cadouri</h2>
-      <p class="text-center mb-4">Fără plic, fără presiune 😄
-Ne bucurăm enorm că veți fi alături de noi — și asta e tot ce contează!
-Nu avem nevoie de plic sau daruri, dar dacă vreți totuși să ne surprindeți cu ceva, am pregătit o listă cu lucruri care ne-ar prinde bine în noua noastră viață de “soț + soție”.
-Unele cadouri sunt mai costisitoare, dar pentru asta există prieteni – merge perfect și cu “cadou la comun”!
-Luați-o ca pe o inspirație, nu ca pe o listă de cumpărături! 😉</p>
-      
+  <div class="container">
+    <h2 class="h1 text-center pb-3 ww-title">Idei de Cadouri</h2>
+    <p class="text-center mb-4">
+      Fără plic, fără presiune 😄<br>
+      Ne bucurăm enorm că veți fi alături de noi — și asta e tot ce contează!<br>
+      Nu avem nevoie de plic sau daruri, dar dacă vreți totuși să ne surprindeți cu ceva, am pregătit o listă cu lucruri care ne-ar prinde bine în noua noastră viață de “soț + soție”.<br>
+      Unele cadouri sunt mai costisitoare, dar pentru asta există prieteni – merge perfect și cu “cadou la comun”!<br>
+      Luați-o ca pe o inspirație, nu ca pe o listă de cumpărături! 😉
+    </p>
+
     <!-- Butonul care activează secțiunea -->
     <div class="text-center mb-4">
       <button id="showGiftsBtn" class="btn btn-primary">Vezi ideile de cadouri</button>
@@ -353,24 +355,38 @@ Luați-o ca pe o inspirație, nu ca pe o listă de cumpărături! 😉</p>
     <div id="giftSectionContent" style="display: none;">
       <div class="gift-container" id="product-list"></div>
 
-  <form id="giftForm" class="gift-form" style="display: none;">
-  <h2>Rezervă Cadoul</h2>
-  <input type="hidden" id="selectedGift" name="cadou">
-  <div class="form-group">
-    <label for="gift-name">Numele Dvs:</label>
-    <input type="text" id="gift-name" name="nume" required>
-  </div>
-  <div class="form-group">
-    <label for="gift-email">Adresa de Email:</label>
-    <input type="email" id="gift-email" name="email" required>
-  </div>
-  <div class="text-center">
-    <button type="submit" class="btn btn-primary btn-reserve">Confirmă Rezervarea</button>
-  </div>
-  <p id="gift-status"></p>
-</form>
+      <form id="giftForm" class="gift-form" style="display: none;">
+        <h2>Rezervă Cadoul</h2>
+        <input type="hidden" id="selectedGift" name="cadou">
+        <div class="form-group">
+          <label for="gift-name">Numele Dvs:</label>
+          <input type="text" id="gift-name" name="nume" required>
+        </div>
+        <div class="form-group">
+          <label for="gift-email">Adresa de Email:</label>
+          <input type="email" id="gift-email" name="email" required>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary btn-reserve">Confirmă Rezervarea</button>
+        </div>
+        <p id="gift-status"></p>
+      </form>
     </div>
   </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const showGiftsBtn = document.getElementById("showGiftsBtn");
+    const giftSection = document.getElementById("giftSectionContent");
+
+    showGiftsBtn.addEventListener("click", function () {
+      giftSection.style.display = "block"; // Afișează lista și formularul
+      showGiftsBtn.style.display = "none"; // Ascunde butonul
+      loadProducts(); // Funcția ta pentru a încărca produsele din Google Sheets
+    });
+  });
+</script>
 
   <!-- Footer-ul existent -->
 
