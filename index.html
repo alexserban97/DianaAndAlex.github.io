@@ -519,16 +519,29 @@ form.addEventListener("submit", async function(event) {
     }
 });
 function selectGift(productName, productRow) {
-  const form = document.getElementById("reservation-form");
+  const form = document.getElementById("giftForm");
+  if (!form) {
+    console.error("Gift form not found!");
+    return;
+  }
+  
+  // Show the form section if it's hidden
+  document.getElementById("giftSectionContent").style.display = "block";
+  
+  // Show the form itself
   form.style.display = "block";
-  form.dataset.productName = productName;
-  form.dataset.productRow = productRow; // Adaugă acest rând
   
-  document.getElementById("selected-gift").textContent = productName;
-  document.getElementById("gift-name").value = productName;
+  // Set the selected gift in the hidden input
+  document.getElementById("selectedGift").value = productName;
   
-  // Scroll la formular
+  // Scroll to the form
   form.scrollIntoView({ behavior: 'smooth' });
+  
+  // You might also want to update any status message
+  const statusElement = document.getElementById("gift-status");
+  if (statusElement) {
+    statusElement.textContent = `Ați selectat: ${productName}`;
+  }
 }
   // Inițializare
   loadProducts();
